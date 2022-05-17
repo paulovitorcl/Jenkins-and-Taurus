@@ -1,19 +1,35 @@
-node {
-   stage('Build') {
-      // Run the Taurus build
-   }
-   stage('Performance Tests') {
-    parallel(
-        BlazeMeterTest: {
-            dir ('/var/jenkins_home/scripts') {
-               sh 'sudo su - jenkins; bzt quick_test.yml'
-            }
-        },
-        Analysis: {
-            sleep 60
-        })
-   }
+pipeline {
+    agent any
 
-   stage('Deploy') {
-   }
+    environment {
+        GIT_REPO="https://github.com/paulovitorcl/Jenkins-and-Taurus.git"
+        GIT_BRANCH="main"
+    }
+
+    stages {
+        stage ("Git checkout"){
+            steps {
+                deleteDir()
+                git branch: "$GIT_BRANCH", url: "$GIT_REPO"
+            }
+        }
+        stage ("Build") {
+            // Run the build 
+        }
+        stage ("Tests") {
+            steps {
+                script{
+                    try {
+                    sh "docker run --rm -v /var/jenkins_home/workspace/TestTaurus:/bzt-configs -v /var/jenkins_home/workspace/TestTaurus/reports:/tmp/artifacts blazemeter/taurus example.yml"
+                  } finally {
+                    junit 'reports/report.xml'
+                    cleanWs()
+                }
+                }
+            }
+        }
+        stage ("Deploy") {
+            // Run the deploy
+        }
+    }
 }
