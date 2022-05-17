@@ -21,6 +21,13 @@ pipeline {
                 }
             }
         }
+        stage ("Push image to ECR") {
+            steps {
+                script {
+                    sh 'echo Push'
+                }
+            }
+        }
         stage ("Tests") {
             steps {
                 script{
