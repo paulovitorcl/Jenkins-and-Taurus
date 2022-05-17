@@ -15,6 +15,9 @@ pipeline {
         }
         stage ("Build") {
             // Run the build 
+            steps {
+
+            }
         }
         stage ("Tests") {
             steps {
@@ -30,6 +33,9 @@ pipeline {
         }
         stage ("Deploy") {
             // Run the deploy
+            steps {
+                
+            }
         }
     }
 }
