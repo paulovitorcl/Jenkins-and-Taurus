@@ -6,7 +6,7 @@ node {
     parallel(
         BlazeMeterTest: {
             dir ('/var/jenkins_home/scripts') {
-               sh 'sudo su - root; bzt quick_test.yml'
+               sh 'sudo su - jenkins; bzt quick_test.yml'
             }
         },
         Analysis: {
