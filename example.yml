@@ -1,0 +1,14 @@
+execution:
+- concurrency: 100
+  ramp-up: 30s
+  hold-for: 1m
+  scenario: load-example
+
+scenarios:
+  load-example:
+    requests:
+    - http://blazedemo.com
+
+reporting:
+- module: junit-xml
+  filename: /tmp/artifacts/report.xml
