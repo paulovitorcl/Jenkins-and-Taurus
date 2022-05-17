@@ -16,7 +16,9 @@ pipeline {
         stage ("Build") {
             // Run the build 
             steps {
-
+                script {
+                    sh 'echo Build'
+                }
             }
         }
         stage ("Tests") {
@@ -34,7 +36,9 @@ pipeline {
         stage ("Deploy") {
             // Run the deploy
             steps {
-                
+                script {
+                    sh 'echo Deploy'
+                }
             }
         }
     }
