@@ -29,6 +29,11 @@ pipeline {
             }
         }
         stage ("Tests") {
+            when {
+                expression {
+                    return (findfiles(glob: "${WORKSPACE}/*.yml").length > 0)
+                }
+            }
             steps {
                 script{
                     try {
