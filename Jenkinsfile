@@ -29,7 +29,7 @@ pipeline {
             }
         }
         stage ("Tests") {
-            when { expression { fileExists("${WORKSPACE}/*.yml") } }
+            when { expression { fileExists("${WORKSPACE}/example.yml") } }
             steps {
                 script{
                     try {
