@@ -29,11 +29,7 @@ pipeline {
             }
         }
         stage ("Tests") {
-            when {
-                expression {
-                    return (findfiles(glob: "${WORKSPACE}/*.yml").length > 0)
-                }
-            }
+            when { expression { fileExists("${WORKSPACE}/*.yml") } }
             steps {
                 script{
                     try {
